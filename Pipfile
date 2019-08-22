@@ -6,7 +6,25 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-flask = "*"
+flask = "~=1.0.2"
+flask-sqlalchemy = "~=2.3"
+python-dotenv = "~=0.10"
+sqlalchemy-utils = "~=0.33"
+alembic = "~=1.0"
+psycopg2-binary = "~=2.7"
+marshmallow = "~=2.18"
+marshmallow-sqlalchemy = "~=0.15"
+flask-restplus = "~=0.12"
+requests = "~=2.21"
+flask-cors = "~=3.0"
+logzero = "~=1.5"
+jsonschema = "~=2.6"
+pytest = "~=4.1"
+apispec = "~=0.39"
+marshmallow-enum = "~=1.4"
+minio = "~=4.0"
+werkzeug = "~=0.15"
+marshmallow-jsonschema = "~=0.5.0"
 
 [requires]
 python_version = "3.7"

@@ -15,7 +15,7 @@ RUN apt-get install -y nginx
 COPY . /app
 COPY ./conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY ./conf/uwsgi.ini /etc/uwsgi/
-COPY ./conf/sampleserve.com /etc/nginx/sites-enabled/sampleserve.com
+COPY ./conf/flaskapikit.com /etc/nginx/sites-enabled/flaskapikit.com
 
 
 ENV PORT=5000

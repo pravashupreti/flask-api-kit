@@ -8,7 +8,7 @@ volumes:
     driver: local
 
 networks:
-  flask-kit:
+  flask_api_kit:
     name: flask_api_kit
     driver: bridge
 

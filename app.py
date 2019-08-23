@@ -8,22 +8,10 @@ from logzero import logger, loglevel, logfile, formatter
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 from config import Config
-from api.commands import register_commands
 from api.models.meta import db
-from api.services import StorageService, NotificationService
 from api.resources.api import api
-from api.utilities.json_encoder import JsonEncoder
-from api.utilities.units import define_units
 from api.utilities.mode import has_mode, MODE_MAINTENANCE
 from api.exceptions.error_handlers import init_error_handlers
-from sampleserve.app import init_v1_app
-from admin.app import init_admin_app
-
-
-def _init_services():
-    StorageService(Config.MINIO_HOST, Config.MINIO_ACCESS_KEY, Config.MINIO_SECRET_KEY)
-    NotificationService(Config.FCM_URL, Config.FCM_AUTHORIZATION_KEY)
-    define_units()
 
 
 def _init_logging():
@@ -93,23 +81,15 @@ def apply_version_header(response: Response):
 def create_app() -> Flask:
     app = simple_app()
     app.wsgi_app = ProxyFix(app.wsgi_app)
-    _init_services()
-
-    app.config['RESTPLUS_JSON']['cls'] = app.json_encoder = JsonEncoder
-
+    
     api.init_app(app)
     db.init_app(app)
-    app.jinja_env.add_extension('jinja2.ext.do')
-
+    
     _init_logging()
     _register_before_request(app)
     _register_after_request(app)
     _register_maintenance_mode(app)
-    register_commands(app)
-
-    init_v1_app(app)
-    init_admin_app(app)
-
+    
     app.after_request(apply_version_header)
 
     return app

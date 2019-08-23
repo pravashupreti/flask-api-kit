@@ -1,0 +1,1 @@
+from api.exceptions.generic_exception import GenericException

@@ -1,5 +1,7 @@
 FROM python:3.7
 
+RUN apt update
+
 RUN pip install pipenv
 RUN pip install uwsgi
 

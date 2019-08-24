@@ -9,12 +9,12 @@ from api.models.base_model import session
 from api.schemas.base_schema import BaseSchema
 
 
-class UserSchema(ModelSchema, BaseSchema):
+class PostSchema(ModelSchema, BaseSchema):
     id = UUID(required=False)
-    email = Email(required=True)
-    username = String(required=True)
+    post = String(required=True)
+    posted_by = UUID(required=True)
     
     class Meta:
-        model = User
+        model = Post
         strict = True
         sqla_session = session

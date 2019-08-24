@@ -9,12 +9,13 @@ from api.models.base_model import session
 from api.schemas.base_schema import BaseSchema
 
 
-class UserSchema(ModelSchema, BaseSchema):
-    id = UUID(required=False)
-    email = Email(required=True)
-    username = String(required=True)
+class LikeSchema(ModelSchema, BaseSchema):
+    
+    post_id = UUID(required=False)
+    comment_id = UUID(required=False)
+    liked_by = UUID(required=True)
     
     class Meta:
-        model = User
+        model = Like
         strict = True
         sqla_session = session

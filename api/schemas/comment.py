@@ -9,12 +9,14 @@ from api.models.base_model import session
 from api.schemas.base_schema import BaseSchema
 
 
-class UserSchema(ModelSchema, BaseSchema):
+class CommentSchema(ModelSchema, BaseSchema):
     id = UUID(required=False)
-    email = Email(required=True)
-    username = String(required=True)
-    
+    comment = String(required=True)
+    post_id = UUID(required=False)
+    comment_id = UUID(required=False)
+    commented_by = UUID(required=True)
+
     class Meta:
-        model = User
+        model = Comment
         strict = True
         sqla_session = session

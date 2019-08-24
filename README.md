@@ -6,6 +6,10 @@ This repository is a flask starter kit focusing on making robust API.
 The api root will contain generated Swagger documentation for endpoints.
 On a local environment this will usually be http://localhost:5000 if using docker-compose.
 
+## API implements simple social network data model
+
+![alt text](docs/FlaskApiKit-ER.png)
+
 ## Dev Setup
 
 Copy the example .env file

@@ -3,7 +3,7 @@ from marshmallow_enum import EnumField
 from marshmallow_sqlalchemy import ModelSchema
 from marshmallow.fields import UUID, Email, Nested, Url, Dict, String
 
-from api.models import User
+from api.models import Comment
 from api.models.base_model import session
 
 from api.schemas.base_schema import BaseSchema

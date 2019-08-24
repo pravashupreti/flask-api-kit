@@ -3,8 +3,8 @@ from enum import Enum
 from uuid import uuid4, UUID
 
 from sqlalchemy.orm import relationship
-from sqlalchemy import Column, ForeignKey
-from sqlalchemy_utils import UUIDType, EmailType, URLType, ChoiceType, String
+from sqlalchemy import Column, ForeignKey,String
+from sqlalchemy_utils import UUIDType
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 
@@ -17,9 +17,9 @@ class Comment(Base, BaseModel):
     id = Column(UUIDType(binary=False), primary_key=True)
     comment = Column(String,nullable=False)
 
-    post_id = Column(UUIDType(binary=False,nullable=True), ForeignKey("posts.id"))
-    comment_id = Column(UUIDType(binary=False,nullable=True), ForeignKey("comments.id"))
-    commented_by = Column(UUIDType(binary=False,nullable=False), ForeignKey("users.id"))
+    post_id = Column(UUIDType(binary=False), ForeignKey("posts.id"), nullable=True,)
+    comment_id = Column(UUIDType(binary=False), ForeignKey("comments.id"), nullable=True)
+    commented_by = Column(UUIDType(binary=False), ForeignKey("users.id"), nullable=False)
 
     def __init__(
             self, *, id: UUID = None, comment: str, post_id: UUID, comment_id: UUID, commented_by: UUID

@@ -63,6 +63,8 @@ class BaseConfig:
 
     SEED_DATABASE = _is_truthy("SEED_DATABASE", False)
 
+    AUTH_REQUIRED = _not_falsy("AUTH_REQUIRED", True)
+
     with open(ROOT + '/version.txt') as f:
         VERSION = f.read().strip()
 

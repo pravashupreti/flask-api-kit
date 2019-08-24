@@ -43,7 +43,7 @@ class ApiResource:
 
     def index(self, function: Callable) -> Callable:
         return _combine(
-            self._auth,
+            #self._auth,
             self.api.expect(self.meta.index_parser),
             self.api.doc(model=[self.model], **self._doc_kvargs),
             marshmallow_with(
@@ -57,7 +57,7 @@ class ApiResource:
         # validate_schema(self.meta.api_model)
         response_status = HTTPStatus.CREATED
         return _combine(
-            self._auth,
+            #self._auth,
             self.api.expect(self.model),
             self.api.doc(**self._doc_kvargs),
             self.api.response(response_status, response_status.phrase, model=self.model),
@@ -71,7 +71,7 @@ class ApiResource:
 
     def get(self, function: Callable) -> Callable:
         return _combine(
-            self._auth,
+            #self._auth,
             self.api.expect(self.meta.view_parser),
             self.api.doc(model=self.model, **self._doc_kvargs),
             marshmallow_with(
@@ -83,7 +83,7 @@ class ApiResource:
 
     def get_html(self, function: Callable) -> Callable:
         return _combine(
-            self._auth,
+            #self._auth,
             self.api.expect(self.meta.view_parser),
             self.api.doc(model=self.model, **self._doc_kvargs),
             function)
@@ -91,7 +91,7 @@ class ApiResource:
     def put(self, function: Callable) -> Callable:
         return _combine(
             # @validate_schema(put_validator)
-            self._auth,
+            #self._auth,
             self.api.doc(model=self.model, **self._doc_kvargs),
             self.api.expect(self.model),
             marshmallow_with(
@@ -106,7 +106,7 @@ class ApiResource:
 
     def patch(self, function: Callable) -> Callable:
         return _combine(
-            self._auth,
+            #self._auth,
             self.api.doc(model=self.model, **self._doc_kvargs),
             self.api.expect(self.model),
             marshmallow_with(self.meta.schema_class, many=False, strict=True),
@@ -120,7 +120,7 @@ class ApiResource:
             return None, response_status
 
         return _combine(
-            self._auth,
+            #self._auth,
             self.api.doc(**self._doc_kvargs),
             self.api.response(response_status, response_status.phrase),
             wrapper)

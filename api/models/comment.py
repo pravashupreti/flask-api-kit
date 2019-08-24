@@ -3,7 +3,7 @@ from enum import Enum
 from uuid import uuid4, UUID
 
 from sqlalchemy.orm import relationship
-from sqlalchemy import Column, ForeignKey,String
+from sqlalchemy import Column, ForeignKey, String
 from sqlalchemy_utils import UUIDType
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property

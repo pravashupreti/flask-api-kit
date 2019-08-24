@@ -11,19 +11,17 @@ from sqlalchemy.ext.hybrid import hybrid_property
 from api.models.meta import Base
 from api.models.base_model import BaseModel
 
-class User(Base, BaseModel):
-    __tablename__ = "users"
+class Friend(Base, BaseModel):
+    __tablename__ = "friends"
 
-    id = Column(UUIDType(binary=False), primary_key=True)
-    email = Column(EmailType, unique=True, nullable=False)
-    username = Column(String, nullable=False)
+    user_id = Column(UUIDType(binary=False,nullable=False), ForeignKey("users.id"))
+    friend_id = Column(UUIDType(binary=False,nullable=False), ForeignKey("users.id"))
 
     def __init__(
-            self, *, id: UUID = None, email: str, username: str
+            self, *, user_id: UUID, friend_id: UUID
     ):
-        self.id = id or uuid4()
-        self.email = email      
-        self.username = username  
+        self.user_id = user_id
+        self.friend_id = friend_id
         
     def __repr__(self):
-        return f'<User {self.email} ({self.id})>'
+        return f'<Friend {self.user_id}>'

@@ -5,21 +5,21 @@ from marshmallow.exceptions import ValidationError
 from api.utilities.common import log_error
 from api.exceptions.generic_exception import GenericException
 
-# authorizations = {
-#     "apiKey": {
-#         "type": "apiKey",
-#         "in": "header",
-#         "name": "Authorization",
-#         "template": "Bearer {apiKey}",
-#     }
-# }
+authorizations = {
+    "apiKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "template": "Bearer {apiKey}",
+    }
+}
 
 api = Api(
     version="1",
     title="Flask Api Kit",
     description="Flask api kit",
     prefix="/api",
-    # authorizations=authorizations
+    authorizations=authorizations
     )
 
 

@@ -10,6 +10,10 @@ On a local environment this will usually be http://localhost:5000 if using docke
 
 ![alt text](docs/FlaskApiKit-ER.png)
 
+## API webview screenshot
+
+![alt text](docs/api-screenshot.png)
+
 ## Dev Setup
 
 Copy the example .env file

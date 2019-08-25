@@ -11,6 +11,8 @@ before_script:
   - pipenv run pipenv_to_requirements -f
   - pip install -r requirements.txt
   - pip install -r requirements-dev.txt
+  - pip install pylint-sqlalchemy
+
   
 jobs:
   include:

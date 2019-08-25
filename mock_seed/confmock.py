@@ -32,5 +32,9 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 seed_file_order = [
-    "users.xml"
+    "users.xml",
+    "posts.xml",
+    "friend_list.xml",
+    "comments.xml",
+    "likes.xml"
 ]

@@ -22,17 +22,19 @@ depends_on = None
 
 def upgrade():
     op.create_table(
-        'likes',
+        'likes',        
         sa.Column('id',
                   sqlalchemy_utils.types.uuid.UUIDType(),
-                  default=uuid.uuid4, nullable=False),
-        sa.Column('user_id',
+                  default=uuid.uuid4, nullable=False),        
+        sa.Column('post_id',
                   sqlalchemy_utils.types.uuid.UUIDType(),
-                  default=uuid.uuid4, nullable=False),
-        sa.Column('friend_id',
+                  default=uuid.uuid4, nullable=True),
+        sa.Column('comment_id',
                   sqlalchemy_utils.types.uuid.UUIDType(),
-                  default=uuid.uuid4, nullable=False),                  
-        sa.PrimaryKeyConstraint('id')        
+                  default=uuid.uuid4, nullable=True),
+        sa.Column('liked_by',
+                  sqlalchemy_utils.types.uuid.UUIDType(),
+                  default=uuid.uuid4, nullable=False)        
         )
 
 

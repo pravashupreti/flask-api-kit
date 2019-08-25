@@ -31,6 +31,7 @@ def upgrade():
         sa.Column('username',
                   sa.String(),
                   nullable=False),                  
+
         sa.PrimaryKeyConstraint('id'),
         sa.UniqueConstraint('email', name='users_email_key')
         )

@@ -6,11 +6,14 @@ env:
     # include $HOME/.local/bin for `aws`
     - PATH=$HOME/.local/bin:$PATH
 
+before_script:  
+  - pipenv install
+  
 jobs:
   include:
     - stage: check_lint
       language: python
-      node_js: "3.7"
+      python: "3.7"
       
       name: "Pass Linter"
       script: |
@@ -18,7 +21,7 @@ jobs:
       
     - stage: py_test
       language: python
-      node_js: "3.7"            
+      python: "3.7"            
     
       name: "Run Unit test"
       script: |

@@ -17,7 +17,7 @@ jobs:
       
       name: "Pass Linter"
       script: |
-                pylint api      
+                python -m pylint api
       
     - stage: py_test
       language: python
@@ -25,7 +25,7 @@ jobs:
     
       name: "Run Unit test"
       script: |
-                python -m pytest -v      
+                python -m pytest -v
 
 after_success:
   - echo "Successfully executed jobs"

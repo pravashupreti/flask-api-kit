@@ -1,0 +1,28 @@
+# linux distribution to be used in VM
+dist: xenial
+
+env:
+  global:
+    # include $HOME/.local/bin for `aws`
+    - PATH=$HOME/.local/bin:$PATH
+
+jobs:
+  include:
+    - stage: check_lint
+      language: python
+      node_js: "3.7"
+      
+      name: "Pass Linter"
+      script: |
+                pylint api      
+      
+    - stage: py_test
+      language: python
+      node_js: "3.7"            
+    
+      name: "Run Unit test"
+      script: |
+                python -m pytest -v      
+
+after_success:
+  - echo "Successfully executed jobs"

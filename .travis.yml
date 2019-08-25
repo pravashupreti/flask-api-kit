@@ -4,7 +4,9 @@ python:
 install:
   - 'pip install pipenv'
   - 'pipenv sync'
-script: 'python -m pytest'
+script: 
+  - ls -al
+  - python -m pytest  
           
 after_success:
   - echo "RUN code coverate here 'python-codacy-coverage -r coverage.xml' "

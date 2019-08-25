@@ -6,23 +6,29 @@ env:
     # include $HOME/.local/bin for `aws`
     - PATH=$HOME/.local/bin:$PATH
 
+before_script:
+  - pip install pipenv-to-requirements
+  - pipenv run pipenv_to_requirements -f
+  - pip install -r requirements.txt
+  - pip install -r requirements-dev.txt
+  
 jobs:
   include:
     - stage: check_lint
       language: python
-      node_js: "3.7"
+      python: "3.7"
       
       name: "Pass Linter"
       script: |
-                pylint api      
+                python -m pylint api
       
     - stage: py_test
       language: python
-      node_js: "3.7"            
+      python: "3.7"            
     
       name: "Run Unit test"
       script: |
-                python -m pytest -v      
+                python -m pytest -v
 
 after_success:
   - echo "Successfully executed jobs"

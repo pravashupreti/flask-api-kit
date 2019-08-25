@@ -1,13 +1,9 @@
 # linux distribution to be used in VM
 dist: xenial
 
-env:
-  global:
-    # include $HOME/.local/bin for `aws`
-    - PATH=$HOME/.local/bin:$PATH
-
 before_script:  
-  - pipenv install
+  - pip install pipenv
+  - pipenv sync
   
 jobs:
   include:

@@ -5,6 +5,8 @@ verify_ssl = true
 
 [dev-packages]
 pylint = "*"
+pylint-sqlalchemy = "~=0.2.0"
+autopep8 = "*"
 
 [packages]
 flask = "~=1.0.2"

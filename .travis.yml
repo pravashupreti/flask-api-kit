@@ -1,0 +1,35 @@
+# linux distribution to be used in VM
+dist: xenial
+
+env:
+  global:
+    # include $HOME/.local/bin for `aws`
+    - PATH=$HOME/.local/bin:$PATH
+
+before_script:
+  - pip install pipenv-to-requirements
+  - pipenv run pipenv_to_requirements -f
+  - pip install -r requirements.txt
+  - pip install -r requirements-dev.txt
+  - pip install pylint-sqlalchemy
+  
+jobs:
+  include:
+    - stage: check_lint
+      language: python
+      python: "3.7"
+      
+      name: "Pass Linter"
+      script: |
+                python -m pylint api
+      
+    - stage: py_test
+      language: python
+      python: "3.7"            
+    
+      name: "Run Unit test"
+      script: |
+                python -m pytest -v
+
+after_success:
+  - echo "Successfully executed jobs"

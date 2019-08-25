@@ -28,6 +28,10 @@ def upgrade():
         sa.Column('email',
                   sqlalchemy_utils.types.email.EmailType(length=255),
                   nullable=False),
+        sa.Column('username',
+                  sa.String(),
+                  nullable=False),                  
+
         sa.PrimaryKeyConstraint('id'),
         sa.UniqueConstraint('email', name='users_email_key')
         )

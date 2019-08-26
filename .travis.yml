@@ -1,6 +1,9 @@
 # linux distribution to be used in VM
 dist: xenial
 
+services:
+  - postgresql
+  
 env:
   global:
     # include $HOME/.local/bin for `aws`
@@ -12,6 +15,8 @@ before_script:
   - pip install -r requirements.txt
   - pip install -r requirements-dev.txt
   - pip install pylint-sqlalchemy
+  - psql -c 'CREATE DATABASE db_test;' -U root
+  - psql -c "CREATE USER postgres WITH PASSWORD 'password';" -U root
 
   
 jobs:

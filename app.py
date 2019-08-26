@@ -9,9 +9,14 @@ from werkzeug.middleware.proxy_fix import ProxyFix
 
 from config import Config
 from api.models.meta import db
+from api.services import StorageService
 from api.resources.api import api
 from api.utilities.mode import has_mode, MODE_MAINTENANCE
 from api.exceptions.error_handlers import init_error_handlers
+
+
+def _init_services():
+    StorageService(Config.MINIO_HOST, Config.MINIO_ACCESS_KEY, Config.MINIO_SECRET_KEY)
 
 
 def _init_logging():

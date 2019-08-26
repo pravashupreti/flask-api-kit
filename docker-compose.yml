@@ -75,7 +75,7 @@ services:
     image: flask_api_kit
     environment:
       FLASK_ENV: testing
-      TEST_DATABASE_URI: postgres://postgres:password@dbtest:5432/postgres
+      TEST_DATABASE_URI: postgres://postgres:password@db_test:5432/postgres
       MINIO_HOST: minio:9000
       MINIO_ACCESS_KEY: minio
       MINIO_SECRET_KEY: minio123

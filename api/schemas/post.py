@@ -14,6 +14,7 @@ class PostSchema(ModelSchema, BaseSchema):
     post = String(required=True)
     posted_by = UUID(required=True)
     user = Nested("UserSchema", many=False)
+    comments = Nested("CommentSchema", many=True)
 
     class Meta:
         model = Post

@@ -14,7 +14,8 @@ class UserSchema(ModelSchema, BaseSchema):
     email = Email(required=True)
     username = String(required=True)
     posts = Nested("PostSchema", many=True)
-    
+    comments = Nested("CommentSchema", many=True)
+
     class Meta:
         model = User
         strict = True

@@ -16,13 +16,6 @@ before_install:
   - sudo /etc/init.d/postgresql stop
   - sudo service mysql stop
 
-before_script:
-  - pip install pipenv-to-requirements
-  - pipenv run pipenv_to_requirements -f
-  - pip install -r requirements.txt
-  - pip install -r requirements-dev.txt
-  - pip install pylint-sqlalchemy  
-
 jobs:
   include:
     # - stage: check_lint

@@ -15,10 +15,9 @@ before_script:
   - pip install -r requirements.txt
   - pip install -r requirements-dev.txt
   - pip install pylint-sqlalchemy
-  - psql -c 'CREATE DATABASE db_test;' -U root
-  - psql -c "CREATE USER postgres WITH PASSWORD 'password';" -U root
+  - psql -c 'CREATE DATABASE db_test;' -U postgres
+  - psql -c "ALTER USER postgres WITH PASSWORD 'password';" -U postgres
 
-  
 jobs:
   include:
     - stage: check_lint

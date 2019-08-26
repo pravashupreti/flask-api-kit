@@ -15,6 +15,9 @@ class CommentSchema(ModelSchema, BaseSchema):
     post_id = UUID(required=False)
     comment_id = UUID(required=False)
     commented_by = UUID(required=True)
+    post = Nested("PostSchema", many=False)
+    user = Nested("UserSchema", many=False)
+    comments = Nested("CommentSchema", many=True)
 
     class Meta:
         model = Comment

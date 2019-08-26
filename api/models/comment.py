@@ -20,9 +20,14 @@ class Comment(Base, BaseModel):
     post_id = Column(UUIDType(binary=False), ForeignKey("posts.id"), nullable=True,)
     comment_id = Column(UUIDType(binary=False), ForeignKey("comments.id"), nullable=True)
     commented_by = Column(UUIDType(binary=False), ForeignKey("users.id"), nullable=False)
+    
+    user = relationship("User", back_populates="comments")
+    post = relationship("Post", back_populates="comments")    
+    comments = relationship("Comment")
 
     def __init__(
-            self, *, id: UUID = None, comment: str, post_id: UUID, comment_id: UUID, commented_by: UUID
+            self, *, id: UUID = None, comment: str, post_id: UUID, comment_id: UUID,
+            commented_by: UUID
     ):
         self.id = id or uuid4()
         self.comment = comment

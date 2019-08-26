@@ -13,6 +13,7 @@ class UserSchema(ModelSchema, BaseSchema):
     id = UUID(required=False)
     email = Email(required=True)
     username = String(required=True)
+    posts = Nested("PostSchema", many=True)
     
     class Meta:
         model = User

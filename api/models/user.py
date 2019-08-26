@@ -17,6 +17,7 @@ class User(Base, BaseModel):
     id = Column(UUIDType(binary=False), primary_key=True)
     email = Column(EmailType, unique=True, nullable=False)
     username = Column(String, nullable=False)
+    posts = relationship("Post", back_populates="user")
 
     def __init__(
             self, *, id: UUID = None, email: str, username: str

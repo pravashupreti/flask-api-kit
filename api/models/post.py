@@ -17,6 +17,7 @@ class Post(Base, BaseModel):
     id = Column(UUIDType(binary=False), primary_key=True)
     post = Column(String,nullable=False)
     posted_by = Column(UUIDType(binary=False), ForeignKey("users.id"))
+    user = relationship("User", back_populates="posts")
 
     def __init__(
             self, *, id: UUID = None, post: str, posted_by: UUID

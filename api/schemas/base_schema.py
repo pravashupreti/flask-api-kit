@@ -59,24 +59,3 @@ class BaseSchema:
                     field, value, model.__tablename__
                 )
             )
-
-    @pre_load
-    def update_data(self, data):
-        hybrid_properties = self.model_hybrid_columns()
-        keys = [k for k in data.keys()]
-        for key in keys:
-            if key in hybrid_properties:
-                if self.Meta.model.__name__ == "WellGauge":
-                    if key != 'depth_to_product':
-                        data.pop(key, None)
-                elif self.Meta.model.__name__ == "CASName":
-                    if key != 'names':
-                        data.pop(key, None)
-                elif self.Meta.model.__name__ == "Depth":
-                    if key != 'value':
-                        data.pop(key, None)
-                elif self.Meta.model.__name__ == "SampleResult":
-                    if key != 'value':
-                        data.pop(key, None)
-                else:
-                    data.pop(key, None)

@@ -45,7 +45,10 @@ class BaseConfig:
         raise Exception('"DATABASE_URI" not set')
 
     DATABASE_COMMIT_CONTEXT = True
-
+    AUTH0_DOMAIN = os.environ.get("AUTH0_DOMAIN")
+    AUTH0_AUDIENCE = os.environ.get("AUTH0_AUDIENCE")
+    AUTH0_ALGORITHMS = json.loads(os.environ.get("AUTH0_ALGORITHMS", '["RS256"]'))
+    
     MINIO_HOST = os.environ.get("MINIO_HOST")
     if not MINIO_HOST:
         raise Exception("MINIO_HOST not set")
@@ -68,10 +71,13 @@ class BaseConfig:
     with open(ROOT + '/version.txt') as f:
         VERSION = f.read().strip()
 
+    LOCAL_JWK = _is_truthy("LOCAL_JWK", False)
+
 
 class DevelopmentConfig(BaseConfig):
     DEBUG = True
     LOG_LEVEL = os.environ.get("LOG_LEVEL", "DEBUG").upper()
+    JWK_PATH = "{}/jwk.json".format(BaseConfig.ROOT)
 
 
 class TestConfig(DevelopmentConfig):

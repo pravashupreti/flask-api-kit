@@ -8,6 +8,7 @@ from logzero import logger, loglevel, logfile, formatter
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 from config import Config
+from api.commands import register_commands
 from api.models.meta import db
 from api.services import StorageService
 from api.resources.api import api
@@ -95,6 +96,8 @@ def create_app() -> Flask:
     _register_after_request(app)
     _register_maintenance_mode(app)
     
+    register_commands(app)
+
     app.after_request(apply_version_header)
 
     return app

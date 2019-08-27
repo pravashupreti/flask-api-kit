@@ -70,6 +70,8 @@ class BaseConfig:
     with open(ROOT + '/version.txt') as f:
         VERSION = f.read().strip()
 
+    LOCAL_JWK = _is_truthy("LOCAL_JWK", False)
+
 
 class DevelopmentConfig(BaseConfig):
     DEBUG = True

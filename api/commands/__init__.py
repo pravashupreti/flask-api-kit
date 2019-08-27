@@ -7,7 +7,6 @@ _COMMANDS = [
 ]
 
 
-def register_commands(app: Flask):
-    print("Registering the commands")
+def register_commands(app: Flask):    
     for command in _COMMANDS:
         app.cli.add_command(command)

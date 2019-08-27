@@ -5,14 +5,14 @@ from flask_restplus import fields
 from flask_restplus import Api as BaseApi
 from flask_restplus.namespace import Namespace
 
-# from api import di
+from api import di
 from api.services.meta_service import MetaService
 from api.decorators.marshmallow_with import marshmallow_with
 
 from config import Config
 
 Api = Union[BaseApi, Namespace]
-# auth = di.auth()
+auth = di.auth()
 
 
 def _combine(n: Callable, *ns: Callable) -> callable:
@@ -29,11 +29,11 @@ class ApiResource:
         self.model = api.add_model(meta.api_model.name, meta.api_model)
         self.require_auth = require_auth
 
-    # @property
-    # def _auth(self) -> Callable:
-    #     if not self.require_auth:
-    #         return lambda x: x
-    #     return auth.required
+    @property
+    def _auth(self) -> Callable:
+        if not self.require_auth:
+            return lambda x: x
+        return auth.required
 
     @property
     def _doc_kvargs(self) -> Mapping:
@@ -43,7 +43,7 @@ class ApiResource:
 
     def index(self, function: Callable) -> Callable:
         return _combine(
-            #self._auth,
+            self._auth,
             self.api.expect(self.meta.index_parser),
             self.api.doc(model=[self.model], **self._doc_kvargs),
             marshmallow_with(
@@ -57,7 +57,7 @@ class ApiResource:
         # validate_schema(self.meta.api_model)
         response_status = HTTPStatus.CREATED
         return _combine(
-            #self._auth,
+            self._auth,
             self.api.expect(self.model),
             self.api.doc(**self._doc_kvargs),
             self.api.response(response_status, response_status.phrase, model=self.model),
@@ -71,7 +71,7 @@ class ApiResource:
 
     def get(self, function: Callable) -> Callable:
         return _combine(
-            #self._auth,
+            self._auth,
             self.api.expect(self.meta.view_parser),
             self.api.doc(model=self.model, **self._doc_kvargs),
             marshmallow_with(
@@ -83,7 +83,7 @@ class ApiResource:
 
     def get_html(self, function: Callable) -> Callable:
         return _combine(
-            #self._auth,
+            self._auth,
             self.api.expect(self.meta.view_parser),
             self.api.doc(model=self.model, **self._doc_kvargs),
             function)
@@ -106,7 +106,7 @@ class ApiResource:
 
     def patch(self, function: Callable) -> Callable:
         return _combine(
-            #self._auth,
+            self._auth,
             self.api.doc(model=self.model, **self._doc_kvargs),
             self.api.expect(self.model),
             marshmallow_with(self.meta.schema_class, many=False, strict=True),
@@ -120,7 +120,7 @@ class ApiResource:
             return None, response_status
 
         return _combine(
-            #self._auth,
+            self._auth,
             self.api.doc(**self._doc_kvargs),
             self.api.response(response_status, response_status.phrase),
             wrapper)

@@ -46,6 +46,7 @@ class BaseConfig:
 
     DATABASE_COMMIT_CONTEXT = True
     AUTH0_DOMAIN = os.environ.get("AUTH0_DOMAIN")
+    AUTH0_AUDIENCE = os.environ.get("AUTH0_AUDIENCE")
     AUTH0_ALGORITHMS = json.loads(os.environ.get("AUTH0_ALGORITHMS", '["RS256"]'))
     
     MINIO_HOST = os.environ.get("MINIO_HOST")

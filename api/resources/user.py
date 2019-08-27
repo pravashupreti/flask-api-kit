@@ -19,10 +19,6 @@ meta.index_parser.add_argument("email", type=str, help="User email")
 
 resource = ApiResource(user_api, meta)
 
-upload_arguments = user_api.parser() \
-    .add_argument('file', location='files', type=FileStorage, required=True)
-
-
 @user_api.route("/users")
 class UserList(Resource):
     @resource.index

@@ -96,7 +96,7 @@ def create_header(kid: str, **kwargs) -> dict:
 def create_claim(
         sub: str,
         iss: str = "https://{}/".format(Config.AUTH0_DOMAIN),
-        aud: str = Config.AUTH0_DOMAIN,
+        aud: str = Config.AUTH0_AUDIENCE,
         iat: datetime = None,
         exp: datetime = None,
         **kwargs) -> dict:

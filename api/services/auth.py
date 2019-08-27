@@ -108,15 +108,15 @@ class Auth:
 
     def get_payload(self, token: str) -> dict:
         rsa_key = self.get_rsa_key(self.get_unverified_header(token))
-
+        
         try:
             return jwt.decode(
-                token,
-                rsa_key,
-                algorithms=self.algorithms,
-                audience=self.identifier,
-                issuer='https://%s/' % self.domain,
-            )
+            token,
+            rsa_key,
+            algorithms=self.algorithms,
+            audience=self.identifier,
+            issuer='https://%s/' % self.domain,
+        )            
         except jwt.ExpiredSignatureError:
             raise AuthTokenExpired
         except jwt.JWTClaimsError:

@@ -57,6 +57,7 @@ def auth_jwks() -> dict:
 
 @singleton
 def auth() -> Auth:
+            
     return Auth(
         Config.AUTH0_ALGORITHMS,
         Config.AUTH0_AUDIENCE,
